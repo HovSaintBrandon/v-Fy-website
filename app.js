@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Initialize form listeners
   initFormListeners();
+  
+  // Show privacy popup on first paint
+  try { showPrivacyModal(); } catch (e) { /* ignore if modal missing */ }
 });
 
 // ==================== Navigation ====================
@@ -382,4 +385,30 @@ function showToast(title, message, type = "success") {
     toast.style.transition = "all 0.3s ease";
     setTimeout(() => toast.remove(), 300);
   }, 4000);
+}
+
+// ==================== Privacy Modal ====================
+function showPrivacyModal() {
+  const modal = document.getElementById('privacy-modal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  // wire close button
+  const closeBtn = document.getElementById('privacy-modal-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => hidePrivacyModal());
+  }
+  // allow ESC to close
+  function escHandler(e) {
+    if (e.key === 'Escape') hidePrivacyModal();
+  }
+  document.addEventListener('keydown', escHandler);
+  // store handler for potential cleanup
+  modal._escHandler = escHandler;
+}
+
+function hidePrivacyModal() {
+  const modal = document.getElementById('privacy-modal');
+  if (!modal) return;
+  modal.style.display = 'none';
+  if (modal._escHandler) document.removeEventListener('keydown', modal._escHandler);
 }

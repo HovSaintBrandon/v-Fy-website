@@ -546,10 +546,10 @@
         </div>
         
         <div class="footer-links">
-          <a href="#">
-            <i data-lucide="shield"></i>
-            Privacy Policy
-          </a>
+          <a href="privacy_policy.html">
+              <i data-lucide="shield"></i>
+              Privacy Policy
+            </a>
           <a href="#">
             <i data-lucide="mail"></i>
             Contact
@@ -569,6 +569,18 @@
 
   <!-- Toast Container -->
   <div id="toast-container" class="toast-container"></div>
+
+  <!-- Privacy popup (shown on site load) -->
+  <div id="privacy-modal" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);z-index:9999;">
+    <div style="background:var(--card,#0f1724);color:var(--text,#e5e7eb);padding:20px;border-radius:12px;max-width:520px;margin:16px;">
+      <h3 style="margin:0 0 8px;">Privacy Policy</h3>
+      <p style="margin:0 0 12px;color:var(--muted,#9ca3af);">We collect minimal data necessary for VenueFY to function. Please review our full privacy policy.</p>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+        <a href="privacy_policy.html" class="btn btn-hero" target="_blank">View Policy</a>
+        <button class="btn btn-outline" id="privacy-modal-close">Close</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="app.js"></script>
