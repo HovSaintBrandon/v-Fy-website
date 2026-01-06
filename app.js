@@ -1,5 +1,5 @@
 // ==================== Configuration ====================
-const API_BASE = "http://13.48.31.160:5000";
+const API_BASE = "https://website.venuefy.top";
 
 // ==================== State ====================
 let studentInfo = null;
