@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VenueFY - The ultimate venue booking & digital attendance app built for JKUAT students. Find lecture halls, mark attendance in seconds.">
+  <title>VenueFY - Smart Campus Venue & Attendance App</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar">
+    <div class="container navbar-content">
+      <a href="#home" class="logo" onclick="scrollToSection(event, 'home')">
+        <div class="logo-icon">
+          <i data-lucide="map-pin"></i>
+        </div>
+        <span class="logo-text">Venue<span class="gradient-text">FY</span></span>
+      </a>
+      
+      <div class="nav-links desktop-only">
+        <a href="#home" onclick="scrollToSection(event, 'home')">Home</a>
+        <a href="#features" onclick="scrollToSection(event, 'features')">Features</a>
+        <a href="#how-it-works" onclick="scrollToSection(event, 'how-it-works')">How It Works</a>
+        <a href="#download" onclick="scrollToSection(event, 'download')">Download</a>
+        <button class="btn btn-hero btn-sm" onclick="scrollToSection(event, 'download')">Download APK</button>
+      </div>
+      
+      <button class="mobile-menu-btn mobile-only" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+        <i data-lucide="menu" id="menu-icon"></i>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+      <div class="container">
+        <a href="#home" onclick="scrollToSection(event, 'home')">Home</a>
+        <a href="#features" onclick="scrollToSection(event, 'features')">Features</a>
+        <a href="#how-it-works" onclick="scrollToSection(event, 'how-it-works')">How It Works</a>
+        <a href="#download" onclick="scrollToSection(event, 'download')">Download</a>
+        <button class="btn btn-hero btn-lg w-full" onclick="scrollToSection(event, 'download')">Download APK</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="hero-bg"></div>
+    
+    <!-- Floating elements -->
+    <div class="floating-elements">
+      <div class="float-blur float-1"></div>
+      <div class="float-blur float-2"></div>
+      <div class="float-icon float-icon-1"><i data-lucide="qr-code"></i></div>
+      <div class="float-icon float-icon-2"><i data-lucide="users"></i></div>
+      <div class="float-icon float-icon-3"><i data-lucide="zap"></i></div>
+    </div>
+    
+    <div class="container hero-content">
+      <div class="hero-text">
+        <!-- Badge -->
+        <div class="hero-badge animate-fade-in" style="animation-delay: 0.1s;">
+          <span class="badge-dot"></span>
+          <span>Built for JKUAT Students</span>
+        </div>
+        
+        <!-- Headline -->
+        <h1 class="hero-headline animate-fade-in" style="animation-delay: 0.2s;">
+          Find Your Lecture. <span class="gradient-text">Mark Attendance.</span> <span>In Seconds.</span>
+        </h1>
+        
+        <!-- Subheadline -->
+        <p class="hero-subheadline animate-fade-in" style="animation-delay: 0.3s;">
+          The ultimate venue booking & digital attendance app built for JKUAT students. No more wandering. No more long roll calls.
+        </p>
+        
+        <!-- CTA Buttons -->
+        <div class="hero-cta animate-fade-in" style="animation-delay: 0.4s;">
+          <button class="btn btn-hero btn-xl" onclick="scrollToSection(event, 'download')">
+            <i data-lucide="download"></i>
+            Download VenueFY APK
+          </button>
+          <button class="btn btn-hero-outline btn-xl" onclick="scrollToSection(event, 'features')">
+            See How It Works
+          </button>
+        </div>
+        
+        <!-- Trust badges -->
+        <div class="trust-badges animate-fade-in" style="animation-delay: 0.5s;">
+          <div class="trust-badge">
+            <i data-lucide="users" class="text-primary"></i>
+            <span>Used by 500+ JKUAT students</span>
+          </div>
+          <span class="badge-divider desktop-only"></span>
+          <div class="trust-badge">
+            <i data-lucide="zap" class="text-accent"></i>
+            <span>No hardware needed</span>
+          </div>
+          <span class="badge-divider desktop-only"></span>
+          <div class="trust-badge">
+            <i data-lucide="qr-code" class="text-primary"></i>
+            <span>QR + NFC + Nearby Share</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- App Preview -->
+      <div class="app-preview animate-fade-in" style="animation-delay: 0.6s;">
+        <div class="preview-glow"></div>
+        <div class="phone-mockups">
+          <div class="phone phone-left desktop-only">
+            <div class="phone-screen">
+              <i data-lucide="qr-code"></i>
+            </div>
+          </div>
+          <div class="phone phone-center">
+            <div class="phone-screen phone-screen-main">
+              <div class="app-icon">
+                <i data-lucide="zap"></i>
+              </div>
+              <h3>VenueFY</h3>
+              <p>Tap to mark attendance</p>
+            </div>
+          </div>
+          <div class="phone phone-right desktop-only">
+            <div class="phone-screen phone-screen-alt">
+              <i data-lucide="users"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section">
+    <div class="section-bg features-bg"></div>
+    <div class="float-blur features-blur-1"></div>
+    <div class="float-blur features-blur-2"></div>
+    
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge section-badge-primary">Features</span>
+        <h2 class="section-title">Everything You Need, <span class="gradient-text">Nothing You Don't</span></h2>
+        <p class="section-subtitle">Built specifically for the JKUAT experience. Simple, fast, and reliable.</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card gradient-border">
+          <div class="feature-icon feature-icon-1">
+            <i data-lucide="map-pin"></i>
+          </div>
+          <h3>Find Free Venues Instantly</h3>
+          <p>Never wander again. See real-time availability of lecture halls, labs, and study rooms across campus.</p>
+        </div>
+        
+        <div class="feature-card gradient-border">
+          <div class="feature-icon feature-icon-2">
+            <i data-lucide="calendar"></i>
+          </div>
+          <h3>Book as Class Rep</h3>
+          <p>Class reps can reserve venues for lectures, meetings, or study sessions with just a few taps.</p>
+        </div>
+        
+        <div class="feature-card gradient-border">
+          <div class="feature-icon feature-icon-3">
+            <i data-lucide="qr-code"></i>
+          </div>
+          <h3>Digital Attendance</h3>
+          <p>QR codes, NFC tags, or Nearby Share – pick your method. Students mark attendance in seconds, not minutes.</p>
+        </div>
+        
+        <div class="feature-card gradient-border">
+          <div class="feature-icon feature-icon-4">
+            <i data-lucide="file-text"></i>
+          </div>
+          <h3>Auto PDF Reports</h3>
+          <p>Attendance records are automatically saved as PDFs. Download, share, or submit to your department instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="how-it-works-section">
+    <div class="section-bg"></div>
+    
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge section-badge-accent">How It Works</span>
+        <h2 class="section-title">From Booking to <span class="gradient-text">PDF Report</span> in 4 Steps</h2>
+        <p class="section-subtitle">Simple enough for everyone, powerful enough for every class.</p>
+      </div>
+      
+      <!-- Desktop Timeline -->
+      <div class="steps-desktop desktop-only">
+        <div class="timeline-line"></div>
+        <div class="steps-grid">
+          <div class="step-item">
+            <div class="timeline-dot timeline-dot-primary"></div>
+            <div class="step-card glass-card">
+              <span class="step-number step-number-primary">01</span>
+              <div class="step-icon step-icon-primary">
+                <i data-lucide="calendar"></i>
+              </div>
+              <h3>Class Rep Books Venue</h3>
+              <p>The class representative selects an available venue and books it for the upcoming lecture or session.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="timeline-dot timeline-dot-accent"></div>
+            <div class="step-card glass-card">
+              <span class="step-number step-number-accent">02</span>
+              <div class="step-icon step-icon-accent">
+                <i data-lucide="qr-code"></i>
+              </div>
+              <h3>Start Attendance Session</h3>
+              <p>Once class begins, the rep starts attendance. A QR code or Nearby Share session is generated instantly.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="timeline-dot timeline-dot-primary"></div>
+            <div class="step-card glass-card">
+              <span class="step-number step-number-primary">03</span>
+              <div class="step-icon step-icon-primary">
+                <i data-lucide="check-circle"></i>
+              </div>
+              <h3>Students Scan & Confirm</h3>
+              <p>Students scan the QR code, tap NFC, or connect via Nearby Share. One tap and they're marked present.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="timeline-dot timeline-dot-accent"></div>
+            <div class="step-card glass-card">
+              <span class="step-number step-number-accent">04</span>
+              <div class="step-icon step-icon-accent">
+                <i data-lucide="file-down"></i>
+              </div>
+              <h3>Session Closes, PDF Saved</h3>
+              <p>When class ends, the session closes automatically. A PDF attendance report is generated and saved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Mobile Timeline -->
+      <div class="steps-mobile mobile-only">
+        <div class="step-mobile">
+          <div class="step-mobile-timeline">
+            <div class="step-mobile-icon step-mobile-icon-primary">
+              <i data-lucide="calendar"></i>
+            </div>
+            <div class="step-mobile-line"></div>
+          </div>
+          <div class="step-mobile-content glass-card">
+            <span class="step-label step-label-primary">Step 01</span>
+            <h3>Class Rep Books Venue</h3>
+            <p>The class representative selects an available venue and books it for the upcoming lecture or session.</p>
+          </div>
+        </div>
+        
+        <div class="step-mobile">
+          <div class="step-mobile-timeline">
+            <div class="step-mobile-icon step-mobile-icon-accent">
+              <i data-lucide="qr-code"></i>
+            </div>
+            <div class="step-mobile-line"></div>
+          </div>
+          <div class="step-mobile-content glass-card">
+            <span class="step-label step-label-accent">Step 02</span>
+            <h3>Start Attendance Session</h3>
+            <p>Once class begins, the rep starts attendance. A QR code or Nearby Share session is generated instantly.</p>
+          </div>
+        </div>
+        
+        <div class="step-mobile">
+          <div class="step-mobile-timeline">
+            <div class="step-mobile-icon step-mobile-icon-primary">
+              <i data-lucide="check-circle"></i>
+            </div>
+            <div class="step-mobile-line"></div>
+          </div>
+          <div class="step-mobile-content glass-card">
+            <span class="step-label step-label-primary">Step 03</span>
+            <h3>Students Scan & Confirm</h3>
+            <p>Students scan the QR code, tap NFC, or connect via Nearby Share. One tap and they're marked present.</p>
+          </div>
+        </div>
+        
+        <div class="step-mobile">
+          <div class="step-mobile-timeline">
+            <div class="step-mobile-icon step-mobile-icon-accent">
+              <i data-lucide="file-down"></i>
+            </div>
+          </div>
+          <div class="step-mobile-content glass-card">
+            <span class="step-label step-label-accent">Step 04</span>
+            <h3>Session Closes, PDF Saved</h3>
+            <p>When class ends, the session closes automatically. A PDF attendance report is generated and saved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Version Comparison Section -->
+  <section id="versions" class="versions-section">
+    <div class="section-bg versions-bg"></div>
+    <div class="float-blur versions-blur-1"></div>
+    <div class="float-blur versions-blur-2"></div>
+    
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge section-badge-accent">Version History</span>
+        <h2 class="section-title">See What's <span class="gradient-text">New</span></h2>
+        <p class="section-subtitle">Compare versions to see how VenueFY keeps getting better for JKUAT students.</p>
+      </div>
+      
+      <div class="version-grid">
+        <!-- Latest Version -->
+        <div class="version-card version-card-latest glass-card">
+          <div class="version-glow"></div>
+          <div class="version-badge version-badge-latest">
+            <i data-lucide="sparkles"></i>
+            <span>Latest Release</span>
+          </div>
+          <div class="version-info">
+            <h3>v2.1.0</h3>
+            <span>Dec 2024</span>
+          </div>
+          <ul class="version-features">
+            <li>
+              <div class="feature-dot feature-dot-primary"></div>
+              <span>Real-time venue availability updates</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-primary"></div>
+              <span>Nearby Share attendance (NFC fallback)</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-primary"></div>
+              <span>Auto-generated PDF attendance reports</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-primary"></div>
+              <span>Dark mode support across all screens</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-primary"></div>
+              <span>Improved QR scanning performance</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-primary"></div>
+              <span>Push notifications for booking confirmations</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Previous Version -->
+        <div class="version-card version-card-previous glass-card">
+          <div class="version-badge version-badge-previous">
+            <i data-lucide="history"></i>
+            <span>Previous Version</span>
+          </div>
+          <div class="version-info version-info-muted">
+            <h3>v2.0.0</h3>
+            <span>Oct 2024</span>
+          </div>
+          <ul class="version-features version-features-muted">
+            <li>
+              <div class="feature-dot feature-dot-muted"></div>
+              <span>Basic venue booking system</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-muted"></div>
+              <span>QR code attendance only</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-muted"></div>
+              <span>Manual PDF generation</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-muted"></div>
+              <span>Light mode only</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-muted"></div>
+              <span>Standard QR scanning</span>
+            </li>
+            <li>
+              <div class="feature-dot feature-dot-muted"></div>
+              <span>No push notifications</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="version-arrow desktop-only">
+        <span>Improved from</span>
+        <i data-lucide="arrow-right" class="text-primary"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="section-bg testimonials-bg"></div>
+    <div class="float-blur testimonials-blur"></div>
+    
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge section-badge-primary">Testimonials</span>
+        <h2 class="section-title">What Students <span class="gradient-text">Are Saying</span></h2>
+        <p class="section-subtitle">Real feedback from real JKUAT students using VenueFY.</p>
+      </div>
+      
+      <!-- Testimonials Grid -->
+      <div id="testimonials-grid" class="testimonials-grid">
+        <!-- Loaded dynamically -->
+      </div>
+      
+      <!-- Share Your Experience Form -->
+      <div class="testimonial-form-container">
+        <div class="testimonial-form glass-card">
+          <h3>Share Your Experience</h3>
+          <p>Verify your student ID and let others know how VenueFY helps you.</p>
+          
+          <!-- Step 1: Verify -->
+          <div id="verify-step" class="form-step">
+            <div class="step-indicator">
+              <div class="step-number-badge">1</div>
+              <span>Enter your Registration Number</span>
+            </div>
+            <div class="input-group">
+              <input type="text" id="reg-number" placeholder="e.g., SCT211-0001/2020" class="input">
+              <button class="btn btn-hero" onclick="verifyStudent()" id="verify-btn">
+                <i data-lucide="check-circle"></i>
+                <span>Verify</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Step 2: Write Testimonial -->
+          <div id="testimonial-step" class="form-step hidden">
+            <div class="verified-badge" id="verified-info">
+              <div class="verified-avatar">
+                <i data-lucide="user"></i>
+              </div>
+              <div class="verified-details">
+                <p id="verified-name">Student Name</p>
+                <p id="verified-course">Course</p>
+              </div>
+              <i data-lucide="check-circle" class="verified-check"></i>
+            </div>
+            
+            <div class="step-indicator">
+              <div class="step-number-badge">2</div>
+              <span>Share your experience (min 20 characters)</span>
+            </div>
+            
+            <textarea id="testimonial-message" placeholder="Tell us how VenueFY has helped you..." maxlength="500" class="textarea"></textarea>
+            
+            <div class="form-footer">
+              <span id="char-count">0/500 characters</span>
+              <button class="btn btn-hero" onclick="submitTestimonial()" id="submit-btn" disabled>
+                <i data-lucide="send"></i>
+                <span>Post Testimonial</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section id="download" class="download-section">
+    <div class="download-bg"></div>
+    <div class="download-gradient"></div>
+    <div class="float-blur download-blur-1"></div>
+    <div class="float-blur download-blur-2"></div>
+    
+    <div class="container">
+      <div class="download-content">
+        <h2 class="section-title">Ready to Save Time <span class="gradient-text">Every Lecture?</span></h2>
+        <p class="section-subtitle">Download VenueFY now and join hundreds of JKUAT students who've already made their campus life easier.</p>
+        
+        <!-- Download Cards -->
+        <div id="download-grid" class="download-grid">
+          <!-- Loaded dynamically -->
+        </div>
+        
+        <!-- Info badges -->
+        <div class="download-badges">
+          <div class="download-badge">
+            <i data-lucide="smartphone" class="text-primary"></i>
+            <span>All Platforms</span>
+          </div>
+          <span class="badge-divider desktop-only"></span>
+          <div class="download-badge">
+            <i data-lucide="shield" class="text-accent"></i>
+            <span>100% Free</span>
+          </div>
+          <span class="badge-divider desktop-only"></span>
+          <div class="download-badge">
+            <span class="text-primary">♥</span>
+            <span>Built by a JKUAT Student</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="#home" class="logo">
+            <div class="logo-icon">
+              <i data-lucide="map-pin"></i>
+            </div>
+            <span class="logo-text">Venue<span class="gradient-text">FY</span></span>
+          </a>
+          <p>Built by Saint • For JKUAT Students</p>
+        </div>
+        
+        <div class="footer-links">
+          <a href="#">
+            <i data-lucide="shield"></i>
+            Privacy Policy
+          </a>
+          <a href="#">
+            <i data-lucide="mail"></i>
+            Contact
+          </a>
+          <a href="#">
+            <i data-lucide="github"></i>
+            GitHub
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© <span id="current-year"></span> VenueFY. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
