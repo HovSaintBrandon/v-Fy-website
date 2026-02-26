@@ -332,8 +332,17 @@ async function loadDownloads() {
 function renderDownloads(downloads, platforms, iconMap) {
   const grid = document.getElementById("download-grid");
 
+  // Fallback downloads with known links
+  const fallbackDownloads = {
+    android: {
+      url: "https://github.com/HovSaintBrandon/VenueFY-for-JKUAT-/releases/download/App-distro/app-release.apk",
+      version: "v2.1.0",
+      size: 24 * 1024 * 1024 // 24 MB estimate
+    }
+  };
+
   grid.innerHTML = platforms.map(p => {
-    const download = downloads[p.key];
+    const download = downloads[p.key] || fallbackDownloads[p.key];
     const isAvailable = !!download;
     const icons = { android: '📱', windows: '🖥️', linux: '🐧', ios: '🍎' };
 
