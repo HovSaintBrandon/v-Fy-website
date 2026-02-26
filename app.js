@@ -9,28 +9,31 @@ let isVerified = false;
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize Lucide icons
   lucide.createIcons();
-  
+
   // Set current year
-  document.getElementById("current-year").textContent = new Date().getFullYear();
-  
+  const yearEl = document.getElementById("current-year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
   // Initialize scroll listener
   initScrollListener();
-  
+
   // Load data
   loadTestimonials();
   loadDownloads();
-  
+
   // Initialize form listeners
   initFormListeners();
-  
+
   // Show privacy popup on first paint
   try { showPrivacyModal(); } catch (e) { /* ignore if modal missing */ }
 });
 
 // ==================== Navigation ====================
+// ==================== Navigation & Reveal ====================
 function initScrollListener() {
   const navbar = document.getElementById("navbar");
-  
+
+  // Navbar scroll effect
   window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
       navbar.classList.add("scrolled");
@@ -38,7 +41,27 @@ function initScrollListener() {
       navbar.classList.remove("scrolled");
     }
   });
+
+  // Scroll Reveal Observer
+  const revealOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("reveal-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  document.querySelectorAll(".reveal").forEach(el => {
+    revealObserver.observe(el);
+  });
 }
+
 
 function scrollToSection(event, sectionId) {
   event.preventDefault();
@@ -52,9 +75,9 @@ function scrollToSection(event, sectionId) {
 function toggleMobileMenu() {
   const menu = document.getElementById("mobile-menu");
   const icon = document.getElementById("menu-icon");
-  
+
   menu.classList.toggle("open");
-  
+
   if (menu.classList.contains("open")) {
     icon.setAttribute("data-lucide", "x");
   } else {
@@ -66,7 +89,7 @@ function toggleMobileMenu() {
 function closeMobileMenu() {
   const menu = document.getElementById("mobile-menu");
   const icon = document.getElementById("menu-icon");
-  
+
   menu.classList.remove("open");
   icon.setAttribute("data-lucide", "menu");
   lucide.createIcons();
@@ -75,26 +98,25 @@ function closeMobileMenu() {
 // ==================== Testimonials ====================
 async function loadTestimonials() {
   const grid = document.getElementById("testimonials-grid");
-  
+
   // Show loading skeleton
   grid.innerHTML = `
     ${[1, 2, 3].map(() => `
-      <div class="testimonial-card glass-card">
-        <div class="skeleton" style="width: 2.5rem; height: 2.5rem; margin-bottom: 1.5rem;"></div>
-        <div class="skeleton" style="height: 1rem; margin-bottom: 0.5rem;"></div>
-        <div class="skeleton" style="height: 1rem; width: 80%; margin-bottom: 0.5rem;"></div>
-        <div class="skeleton" style="height: 1rem; width: 60%; margin-bottom: 1.5rem;"></div>
+      <div class="testimonial-card">
+        <div style="height: 1.5rem; width: 40%; background: var(--secondary); border-radius: 4px; margin-bottom: 1rem; animation: pulse 1.5s infinite;"></div>
+        <div style="height: 1rem; width: 100%; background: var(--secondary); border-radius: 4px; margin-bottom: 0.5rem; animation: pulse 1.5s infinite;"></div>
+        <div style="height: 1rem; width: 80%; background: var(--secondary); border-radius: 4px; margin-bottom: 1.5rem; animation: pulse 1.5s infinite;"></div>
         <div style="display: flex; align-items: center; gap: 1rem;">
-          <div class="skeleton" style="width: 3rem; height: 3rem; border-radius: 50%;"></div>
-          <div>
-            <div class="skeleton" style="height: 1rem; width: 6rem; margin-bottom: 0.5rem;"></div>
-            <div class="skeleton" style="height: 0.75rem; width: 8rem;"></div>
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--secondary); animation: pulse 1.5s infinite;"></div>
+          <div style="flex: 1;">
+            <div style="height: 0.875rem; width: 60%; background: var(--secondary); border-radius: 4px; margin-bottom: 0.25rem; animation: pulse 1.5s infinite;"></div>
+            <div style="height: 0.75rem; width: 40%; background: var(--secondary); border-radius: 4px; animation: pulse 1.5s infinite;"></div>
           </div>
         </div>
       </div>
     `).join("")}
   `;
-  
+
   try {
     const response = await fetch(`${API_BASE}/api/testimonials`);
     if (response.ok) {
@@ -115,7 +137,7 @@ async function loadTestimonials() {
 
 function renderTestimonials(testimonials) {
   const grid = document.getElementById("testimonials-grid");
-  
+
   if (testimonials.length === 0) {
     grid.innerHTML = `
       <div class="empty-state">
@@ -124,25 +146,22 @@ function renderTestimonials(testimonials) {
     `;
     return;
   }
-  
+
   grid.innerHTML = testimonials.map(t => `
-    <div class="testimonial-card glass-card">
-      <div class="quote-icon">
-        <i data-lucide="quote"></i>
-      </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
       <blockquote>"${escapeHtml(t.message)}"</blockquote>
       <div class="testimonial-author">
-        <div class="author-avatar">
-          <span>${getInitials(t.name)}</span>
-        </div>
+        <div class="author-avatar">${getInitials(t.name)}</div>
         <div class="author-info">
-          <h4>${escapeHtml(t.name)}</h4>
-          <p>${escapeHtml(t.course)}</p>
+          <p class="author-name">${escapeHtml(t.name)}</p>
+          <p class="author-course">${escapeHtml(t.course)}</p>
         </div>
       </div>
     </div>
   `).join("");
-  
+
+
   lucide.createIcons();
 }
 
@@ -161,14 +180,14 @@ function initFormListeners() {
   const messageInput = document.getElementById("testimonial-message");
   const charCount = document.getElementById("char-count");
   const submitBtn = document.getElementById("submit-btn");
-  
+
   // Handle Enter key on reg number input
   regInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       verifyStudent();
     }
   });
-  
+
   // Character count for message
   messageInput.addEventListener("input", () => {
     const length = messageInput.value.length;
@@ -180,29 +199,29 @@ function initFormListeners() {
 async function verifyStudent() {
   const regNumber = document.getElementById("reg-number").value.trim();
   const verifyBtn = document.getElementById("verify-btn");
-  
+
   if (!regNumber) {
     showToast("Error", "Please enter your registration number.", "error");
     return;
   }
-  
+
   // Show loading
   verifyBtn.innerHTML = '<div class="loader"></div>';
   verifyBtn.disabled = true;
-  
+
   try {
     const response = await fetch(`${API_BASE}/api/student/${encodeURIComponent(regNumber)}`);
-    
+
     if (response.ok) {
       studentInfo = await response.json();
       isVerified = true;
-      
+
       // Update UI
       document.getElementById("verified-name").textContent = studentInfo.name;
       document.getElementById("verified-course").textContent = studentInfo.course;
       document.getElementById("verify-step").classList.add("hidden");
       document.getElementById("testimonial-step").classList.remove("hidden");
-      
+
       showToast("Verified!", `Welcome, ${studentInfo.name}!`, "success");
       lucide.createIcons();
     } else {
@@ -221,16 +240,16 @@ async function submitTestimonial() {
   const regNumber = document.getElementById("reg-number").value.trim();
   const message = document.getElementById("testimonial-message").value.trim();
   const submitBtn = document.getElementById("submit-btn");
-  
+
   if (!message || message.length < 20) {
     showToast("Error", "Please write at least 20 characters.", "error");
     return;
   }
-  
+
   // Show loading
   submitBtn.innerHTML = '<div class="loader"></div>';
   submitBtn.disabled = true;
-  
+
   try {
     const response = await fetch(`${API_BASE}/api/testimonials`, {
       method: "POST",
@@ -242,10 +261,10 @@ async function submitTestimonial() {
         course: studentInfo?.course || "Unknown",
       }),
     });
-    
+
     if (response.ok) {
       showToast("Submitted!", "Your testimonial is pending approval. Thank you!", "success");
-      
+
       // Reset form
       document.getElementById("reg-number").value = "";
       document.getElementById("testimonial-message").value = "";
@@ -269,38 +288,33 @@ async function submitTestimonial() {
 // ==================== Downloads ====================
 async function loadDownloads() {
   const grid = document.getElementById("download-grid");
-  
+
   const platforms = [
     { key: "android", name: "Android", extension: "APK", iconClass: "platform-icon-android" },
     { key: "windows", name: "Windows", extension: "EXE", iconClass: "platform-icon-windows" },
     { key: "linux", name: "Linux", extension: "AppImage", iconClass: "platform-icon-linux" },
     { key: "ios", name: "iOS", extension: "IPA", iconClass: "platform-icon-ios" },
   ];
-  
+
   const iconMap = {
     android: "smartphone",
     windows: "monitor",
     linux: "monitor",
     ios: "smartphone",
   };
-  
+
   // Show loading skeleton
   grid.innerHTML = platforms.map(p => `
-    <div class="download-card glass-card">
-      <div class="platform-icon ${p.iconClass}">
-        <i data-lucide="${iconMap[p.key]}"></i>
-      </div>
+    <div class="download-card">
+      <div class="icon">⌛</div>
       <h3>${p.name}</h3>
-      <div class="skeleton" style="height: 1rem; width: 5rem; margin: 0 auto 1rem;"></div>
-      <button class="btn btn-outline btn-sm w-full" disabled>
-        <i data-lucide="download"></i>
-        ${p.extension}
-      </button>
+      <div style="height: 0.75rem; width: 60%; background: var(--secondary); border-radius: 4px; margin-bottom: 0.75rem; animation: pulse 1.5s infinite;"></div>
+      <span class="badge">Loading...</span>
     </div>
   `).join("");
-  
+
   lucide.createIcons();
-  
+
   try {
     const response = await fetch(`${API_BASE}/api/downloads`);
     if (response.ok) {
@@ -317,31 +331,22 @@ async function loadDownloads() {
 
 function renderDownloads(downloads, platforms, iconMap) {
   const grid = document.getElementById("download-grid");
-  
+
   grid.innerHTML = platforms.map(p => {
     const download = downloads[p.key];
     const isAvailable = !!download;
-    
+    const icons = { android: '📱', windows: '🖥️', linux: '🐧', ios: '🍎' };
+
     return `
-      <div class="download-card glass-card ${isAvailable ? 'available' : 'unavailable'}">
-        <div class="platform-icon ${p.iconClass}">
-          <i data-lucide="${iconMap[p.key]}"></i>
-        </div>
+      <div class="download-card" onclick="handleDownload('${p.name}', ${isAvailable ? `'${download.url}'` : 'null'})">
+        <div class="icon">${icons[p.key]}</div>
         <h3>${p.name}</h3>
-        <span class="version-info">
-          ${isAvailable ? `${download.version} • ${formatFileSize(download.size)}` : 'Coming Soon'}
-        </span>
-        <button 
-          class="btn ${isAvailable ? 'btn-hero' : 'btn-outline'} btn-sm w-full"
-          onclick="handleDownload('${p.name}', ${isAvailable ? `'${download.url}'` : 'null'})"
-        >
-          <i data-lucide="download"></i>
-          ${p.extension}
-        </button>
+        <p class="ver">${isAvailable ? `${download.version} • ${formatFileSize(download.size)}` : 'Coming Soon'}</p>
+        <span class="badge">${isAvailable ? p.extension : 'SOON'}</span>
       </div>
     `;
   }).join("");
-  
+
   lucide.createIcons();
 }
 
@@ -368,16 +373,16 @@ function escapeHtml(text) {
 
 function showToast(title, message, type = "success") {
   const container = document.getElementById("toast-container");
-  
+
   const toast = document.createElement("div");
   toast.className = `toast toast-${type}`;
   toast.innerHTML = `
     <h4>${escapeHtml(title)}</h4>
     <p>${escapeHtml(message)}</p>
   `;
-  
+
   container.appendChild(toast);
-  
+
   // Auto-remove after 4 seconds
   setTimeout(() => {
     toast.style.opacity = "0";
