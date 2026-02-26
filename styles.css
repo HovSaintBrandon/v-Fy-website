@@ -83,6 +83,10 @@ button {
   text-align: center;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* ===== NAVBAR ===== */
 .navbar {
   position: fixed;
