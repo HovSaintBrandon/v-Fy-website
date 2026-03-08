@@ -577,9 +577,6 @@ section {
 
 .floating-img {
   max-width: 100%;
-  border-radius: 1.5rem;
-  box-shadow: var(--glow-shadow-sm);
-  border: 1px solid var(--border);
   animation: float 6s ease-in-out infinite;
 }
 
