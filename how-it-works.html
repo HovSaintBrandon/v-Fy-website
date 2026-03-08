@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How It Works - VenueFY</title>
+    <meta name="description" content="A complete UX breakdown of how the VenueFY attendance system works." />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="VenueFY Logo" class="logo-img">
+                <span class="logo-text">VenueFY</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="index.html#class-rep">Class Reps</a>
+            </div>
+            <a href="index.html#download" class="nav-cta">⬇ Download App</a>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html#features" onclick="closeMenu()">Features</a>
+            <a href="how-it-works.html" onclick="closeMenu()">How It Works</a>
+            <a href="index.html#class-rep" onclick="closeMenu()">Class Reps</a>
+            <a href="index.html#download" class="nav-cta" onclick="closeMenu()">⬇ Download App</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" style="min-height: 50vh; padding-top: 120px; align-items: center; justify-content: center;">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <p class="hero-label">Complete UX Breakdown</p>
+            <h1 style="font-size: clamp(2.5rem, 6vw, 4.5rem);">
+                <span class="text-fg">How VenueFY</span><br>
+                <span class="hand text-primary text-glow">Works.</span>
+            </h1>
+            <p class="hero-desc">Explore the detailed operation of our attendance system organized by Student, Class
+                Rep, and the Step-by-Step Flow.</p>
+        </div>
+    </section>
+
+    <!-- STUDENT EXPERIENCE -->
+    <section id="student-experience">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">🎓 The Student Experience</p>
+                <h2 class="section-title">Passive Until <span class="font-hand text-primary text-glow">Needed</span>
+                </h2>
+                <p class="section-desc">Designed to be completely passive until it's time to mark attendance.</p>
+            </div>
+
+            <div class="class-rep-layout" style="margin-bottom: 3rem;">
+                <div class="class-rep-features">
+                    <div class="feature-item">
+                        <div class="feature-icon-sm">📲</div>
+                        <div>
+                            <h3>1. Getting Notified</h3>
+                            <p>When a Class Rep opens an attendance session for your lecture, you receive a Push
+                                Notification: <strong>"Attendance is Open! 📍 [Unit Code] session has started. Tap to
+                                    mark your attendance."</strong></p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-sm">🔍</div>
+                        <div>
+                            <h3>2. Marking Attendance (Scanning)</h3>
+                            <p>You use the app to "scan in". The system secretly verifies your
+                                <strong>Eligibility</strong> (Course/Group validity) and <strong>Timing</strong>
+                                (whether the session is still active). Once successful, you are marked as "Scanned".</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-sm">🛠️</div>
+                        <div>
+                            <h3>3. Failsafe (Troubleshooting)</h3>
+                            <p>Phone died? Camera broken? If you cannot scan, you must physically go to the Class Rep to
+                                be added manually. You cannot bypass the attendance logic.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="class-rep-image">
+                    <img src="1.jpg-removebg-preview.png" alt="Student Flow" class="floating-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLASS REP EXPERIENCE -->
+    <section id="class-rep-experience" class="bg-surface">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">👑 The Class Rep Experience</p>
+                <h2 class="section-title">Take Full <span class="font-hand text-primary text-glow">Control</span></h2>
+                <p class="section-desc">The Class Rep holds the authority for the class session and acts as the
+                    administrative manager.</p>
+            </div>
+
+            <div class="class-rep-layout">
+                <div class="class-rep-image">
+                    <img src="2.jpg-removebg-preview.png" alt="Class Rep Flow" class="floating-img">
+                </div>
+                <div class="class-rep-features">
+                    <div class="feature-item">
+                        <div class="feature-icon-sm">🚀</div>
+                        <div>
+                            <h3>1. Starting the Session</h3>
+                            <p>The Rep starts the session on the booked date. Automatically, the Rep is marked Present
+                                and push notifications are instantly blasted to all eligible students.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-sm">📝</div>
+                        <div>
+                            <h3>2. Managing Exceptions</h3>
+                            <p>Students present but unable to scan can be manually added by the Rep securely via their
+                                ID/Registration number. The student is logged with a <code>manual: true</code> flag.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-sm">🔒</div>
+                        <div>
+                            <h3>3. Closing the Session</h3>
+                            <p>After the grace period or lecture concludes, locking attendance rejects further student
+                                scans and auto-marks the venue booking as completed.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-sm">📊</div>
+                        <div>
+                            <h3>4. Exporting Reports</h3>
+                            <p>Hit an endpoint anytime to generate or view Attendance PDF Reports natively, populated
+                                with the list of present members.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENT FLOW -->
+    <section id="event-flow">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">🔄 Behind The Scenes</p>
+                <h2 class="section-title">The Step-by-Step <span class="font-hand text-primary text-glow">Event
+                        Flow</span></h2>
+                <p class="section-desc">Chronological order of events during a standard VenueFY lecture.</p>
+            </div>
+
+            <div class="steps">
+                <div class="steps-line"></div>
+                <div class="step step-left">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h3>Validation Check & ATTENDANCE_STARTED</h3>
+                        <p>The system verifies the current time matches the lecture date. The Rep taps "Start
+                            Attendance". The Server creates an AttendanceSession, ties the BookingId, and marks the Rep
+                            as Present.</p>
+                    </div>
+                </div>
+                <div class="step step-right">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h3>Push Notification Dispatch</h3>
+                        <p>The server queries all students matching the lecture's Course + Group (or students explicitly
+                            mapped) and fires off targeted FCM push notifications to their phones.</p>
+                    </div>
+                </div>
+                <div class="step step-left">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h3>ATTENDANCE_MARKED (Continuous Loop)</h3>
+                        <p>Students receive the notification, open the app, and independently scan in. For every scan,
+                            their ID and Name populate the session while tracking a system log.</p>
+                    </div>
+                </div>
+                <div class="step step-right">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h3>ATTENDANCE_MANUAL_ADD (Conditional)</h3>
+                        <p>The Rep intervenes directly to input IDs of students physically present but technically
+                            unable to scan. The system categorizes these entries correctly.</p>
+                    </div>
+                </div>
+                <div class="step step-left">
+                    <div class="step-num">05</div>
+                    <div class="step-content">
+                        <h3>ATTENDANCE_CLOSED</h3>
+                        <p>The Rep taps "Close Attendance". A closedAt timestamp effectively halts mapping attempts. The
+                            core venue booking triggers a flip to <code>completed: true</code>.</p>
+                    </div>
+                </div>
+                <div class="step step-right">
+                    <div class="step-num">06</div>
+                    <div class="step-content">
+                        <h3>Reporting</h3>
+                        <p>Both Reps and Admins can now download the beautifully compiled PDF displaying manual vs
+                            scanned logs, updating overarching administration metrics actively.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="class-rep-layout" style="margin-top: 5rem; justify-content: center; display: flex;">
+                <img src="3.jpg-removebg-preview.png" alt="Reporting and Analytics Sequence" class="floating-img"
+                    style="max-width: 600px; width: 100%;">
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="logo">
+                <div class="logo-icon"
+                    style="width:32px;height:32px;font-size:12px;display:flex;align-items:center;justify-content:center;background:var(--gradient);border-radius:6px;color:var(--primary-fg);font-weight:700;">
+                    V</div>
+                <span class="logo-text" style="font-size:1rem;font-weight:700;">VenueFY</span>
+            </div>
+            <p class="footer-copy">© <span id="current-year"></span> VenueFY. powered by saint ⚡</p>
+            <div class="footer-links">
+                <a href="privacy_policy.html">Privacy</a>
+                <a href="terms_and_conditions.html">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+        }
+    </script>
+</body>
+
+</html>
